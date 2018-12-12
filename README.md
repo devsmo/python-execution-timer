@@ -17,6 +17,7 @@ TBD
 See example.py for a working example of ExecutionTimer. The output of the example can be found in example_log.csv
 
 **Initialize the timer.**
+
 This should be done at the start of the code.
 
 ```
@@ -25,6 +26,7 @@ ExecutionTimer('./example_log.csv', ',', True)
 
 
 **Log some action**
+
 The start method starts logging, the end method ends it. 
 
 ```
@@ -38,6 +40,7 @@ ExecutionTimer.end('Doing some stuff')
 
 
 **End logging**
+
 At the end of your code, you should complete the log.
 It will give you the total exec time.
 
