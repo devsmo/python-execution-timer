@@ -1,4 +1,4 @@
-from ExecutionTimer import ExecutionTimer
+from execution_timer import ExecutionTimer
 from  random import randrange
 import time
 
