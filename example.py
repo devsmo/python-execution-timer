@@ -8,16 +8,19 @@ categories = ['Data collection', 'Data collection', '']
 
 print(ExecutionTimer)
 
-execTimer = ExecutionTimer('./log.csv', ',')
+execTimer = ExecutionTimer('./example_log.csv', ',')
 
-
-for x in range(1, 10):
+# this will take a while to loop
+for x in range(1, 25):
+	# get random task
 	task = randrange(0, 3)
 
 	execTimer.start(tasks[task], categories[task])
+	
 	time.sleep(randrange(5))
-	execTimer.end('action1')
 	print("Did this: {0}, {1} on key {2}".format(tasks[task], categories[task], task))
+	
+	execTimer.end(tasks[task])
 
 execTimer.complete()
 
