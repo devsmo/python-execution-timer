@@ -25,8 +25,8 @@ class ExecutionTimer:
         action_stack = {}
         delimiter = ','
         log_file = None
-        execStart = None
-        fileHander = None
+        exec_start = None
+        file_hander = None
 
         def __init__(self, log_file, delimiter=','):
             self.log_file = log_file
@@ -39,20 +39,20 @@ class ExecutionTimer:
 
         # Write a line at the beginning of file
         def start(self):
-            self.execStart = int(round(time.time() * 1000))
+            self.exec_start = int(round(time.time() * 1000))
             line = self.delimiter.join(['"Start execution"', '', '0', '0', ''])
             self.writeLog(line)
 
 
         # Write a line at the end of the file with complete exec time
         def complete(self):
-            execEnd = int(round(time.time() * 1000)) - self.execStart
+            exec_end = int(round(time.time() * 1000)) - self.exec_start
             # Write a line at the end of tile?
-            line = self.delimiter.join(['"End execution"', '', '0', str(execEnd), ''])
+            line = self.delimiter.join(['"End execution"', '', '0', str(exec_end), ''])
             self.writeLog(line)
 
-            # terminate fileHander.
-            self.fileHander.close()
+            # terminate file_hander.
+            self.file_hander.close()
 
 
         def addAction(self, action, category):
@@ -66,6 +66,7 @@ class ExecutionTimer:
                 'action': action,
                 'category': category if category else '',
                 'time': int(round(time.time() * 1000)),
+                'exec_time': 0,
                 'comment': ''
             }
 
@@ -79,8 +80,10 @@ class ExecutionTimer:
 
             # Get end time
             data['time'] = int(round(time.time() * 1000)) - data['time']
-            data['execTime'] = int(round(time.time() * 1000)) - self.execStart
+            data['exec_time'] = int(round(time.time() * 1000)) - self.exec_start
             data['comment'] = comment
+
+            # Sort fields
 
             line = self.delimiter.join(str(val) for val in data.values())
             self.writeLog(line)
@@ -88,11 +91,11 @@ class ExecutionTimer:
 
         def writeLog(self, line):
             # Write data to log
-            if not self.fileHander:
+            if not self.file_hander:
                 # create file handler
-                self.fileHander = open(self.log_file, "w+")
+                self.file_hander = open(self.log_file, "w+")
 
-            self.fileHander.write(line +"\n")
+            self.file_hander.write(line +"\n")
             return True
 
     """
@@ -138,7 +141,7 @@ class ExecutionTimer:
         ----------
         action: string
             Name of an action that was previously started
-        comment: string [OPTIONAL]
+        comment: string [optinal]
             Add a free format comment column to log file
         """
         if ExecutionTimer.instance:
