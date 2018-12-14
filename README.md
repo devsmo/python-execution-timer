@@ -10,7 +10,7 @@ The log is a CSV file which allows you to do simple visualization to help you un
 
 ## Methods
 
-**ExecutionTimer.__init__(log_file[, delimiter=',', is_enabled=True])**
+**ExecutionTimer(log_file[, delimiter=',', is_enabled=True])**
 
 When initializing the timer you must provide the path to the log file as a string. The file name including extension must be part of the string.
 *delimiter* defaults to ',' but could be ';' or "\t" too depending on your spreadsheet app.
