@@ -1,4 +1,5 @@
 
+
 # Execution Timer
 
 Get an Excel-friendly execution time log from your app.
@@ -9,7 +10,26 @@ The log is a CSV file which allows you to do simple visualization to help you un
 
 ## Methods
 
-TBD
+**ExecutionTimer.__init__(log_file[, delimiter=',', is_enabled=True])**
+
+When initializing the timer you must provide the path to the log file as a string. The file name including extension must be part of the string.
+*delimiter* defaults to ',' but could be ';' or "\t" too depending on your spreadsheet app.
+*is_enabled* allows you to disable logging when you don't need it, without having to remove all the log lines in code.
+
+
+**ExecutionTimer.start(action[, category=None])**
+
+Starts a new log line, with *action* as the text in the log file.
+*category* is optional. It can help you group different types of actions.
+
+**ExecutionTimer.end(action[, comment])**
+
+This is run after start(). The *action* param should be the same as the action of the previous start.
+*comment* allows you to add extra info into the log. For instance the SQL statement when logging data fetching.
+
+**ExecutionTimer.complete()**
+
+Ends logging. Should usually be placed at the very end of your code.
 
 
 ## Usage

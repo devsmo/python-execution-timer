@@ -99,10 +99,11 @@ class ExecutionTimer:
             return True
 
     """
-    In the root class we instnsiate the private subclass.
-    We also expose a few methods to the ouside code,
+    In the root class we instantiate the private subclass.
+    We also expose a few methods to the ouside code.
     """
-    instance = None     # Save the logger instance to be reused accross the script
+
+    instance = None
 
     def __init__(self, log_file=None, delimiter=',', is_enabled = True):
         if not is_enabled:
@@ -112,7 +113,6 @@ class ExecutionTimer:
         if not ExecutionTimer.instance:
             ExecutionTimer.instance = ExecutionTimer.__ExecutionTimer(log_file, delimiter)
             ExecutionTimer.instance.start()
-
 
 
     def __getattr__(self, name):
@@ -133,6 +133,7 @@ class ExecutionTimer:
         if ExecutionTimer.instance:
             ExecutionTimer.instance.addAction(action, category)
 
+
     def end(action, comment=''):
         """
         End the timer for an action
@@ -147,7 +148,7 @@ class ExecutionTimer:
         if ExecutionTimer.instance:
             ExecutionTimer.instance.endAction(action, comment)
 
-    # name it terminate instead?
+
     def complete():
         """
         End the execution timer.
